@@ -23,10 +23,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_DEBUG_POSTFIX "-dgb")
 
 ########################################################################
-# figure out pkg_dir, pkg_lib_dir, and pkg_bin_dir
+# figure out pkg_root_dir, pkg_lib_dir, and pkg_bin_dir
 ########################################################################
-if(NOT DEFINED pkg_dir)
-	set(pkg_dir "${CMAKE_CURRENT_SOURCE_DIR}/../" )
+if(NOT DEFINED pkg_root_dir)
+	set(pkg_root_dir "${CMAKE_CURRENT_SOURCE_DIR}/../" )
 endif()
 if(NOT DEFINED pkg_lib_dir)
     set(pkg_lib_dir "${PROJECT_BINARY_DIR}/lib")
@@ -34,7 +34,7 @@ endif()
 if(NOT DEFINED pkg_bin_dir)
     set(pkg_bin_dir "${PROJECT_BINARY_DIR}/bin")
 endif()
-message(pkg_dir="${pkg_dir}")
+message(pkg_root_dir="${pkg_root_dir}")
 message(pkg_lib_dir="${pkg_lib_dir}")
 message(pkg_bin_dir="${pkg_bin_dir}")
 
