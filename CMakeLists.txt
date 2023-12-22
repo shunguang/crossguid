@@ -23,27 +23,20 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_DEBUG_POSTFIX "-dgb")
 
 ########################################################################
-# figure out pkg_root_dir, pkg_lib_dir, and pkg_bin_dir
+# figure out if pkg_dir, build_lib_dir, and build_bin_dir are defined:
+#  (a) if not defined,  it is bottom up build
+#  (b) if defined, it is top-down build 
 ########################################################################
-if(NOT DEFINED pkg_root_dir)
-	set(pkg_root_dir "${CMAKE_CURRENT_SOURCE_DIR}/../" )
-endif()
-if(NOT DEFINED pkg_lib_dir)
-    set(pkg_lib_dir "${PROJECT_BINARY_DIR}/lib")
-endif()
-if(NOT DEFINED pkg_bin_dir)
-    set(pkg_bin_dir "${PROJECT_BINARY_DIR}/bin")
-endif()
-message(pkg_root_dir="${pkg_root_dir}")
-message(pkg_lib_dir="${pkg_lib_dir}")
-message(pkg_bin_dir="${pkg_bin_dir}")
-
 # CMAKE_ARCHIVE_OUTPUT_DIRECTORY control the output dir of static libs
 # CMAKE_LIBRARY_OUTPUT_DIRECTORY control the output dir of dynamic/dll libs
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${pkg_lib_dir}")   
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${pkg_lib_dir}")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${pkg_bin_dir}")
+if(DEFINED build_lib_dir)
+	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${build_lib_dir}")   
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${build_lib_dir}")
+endif()
 
+if(DEFINED build_bin_dir)
+	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${build_bin_dir}")
+endif()
 
 # Set the build type if not set
 if(NOT CMAKE_BUILD_TYPE)
